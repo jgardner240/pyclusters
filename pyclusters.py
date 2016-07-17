@@ -20,21 +20,19 @@ def searchNeighbors(row,col):
 if __name__ == '__main__':
     import sys
     from tifffile import imread
-    args = sys.argv[1:]
-    print('Len(argv): ', len(sys.argv))
     
+    if (len(sys.argv) == 2):
+        tif = imread(sys.argv[1])
+        rows = tif.shape[0]
+        cols = tif.shape[1]
+    else:
+        print('Usage: python pyclusters.py <input tiff file>')
+        exit()
+
     bcl = [] # List of clusters found
     bpl = [] # List of bad pixels found
     currentCluster = [] # Current cluster
 
-    for arg in args:
-        print(arg)
-        tif = imread(arg)
-        print(tif.dtype)
-        rows = tif.shape[0]
-        cols = tif.shape[1]
-
-        
     for row in range(rows):
         for col in range(cols):
             if tif[row,col] == 0:
