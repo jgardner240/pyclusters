@@ -21,6 +21,7 @@ if __name__ == '__main__':
     import sys
     from tifffile import imread
     args = sys.argv[1:]
+    print('Len(argv): ', len(sys.argv))
     
     bcl = [] # List of clusters found
     bpl = [] # List of bad pixels found
@@ -37,10 +38,10 @@ if __name__ == '__main__':
     for row in range(rows):
         for col in range(cols):
             if tif[row,col] == 0:
-                searchNeighbors(row,col)
-                bcl.append( (currentCluster) ) # Cluster is complete, add it to the list
-                del(currentCluster)
-                currentCluster = []
+                searchNeighbors(row,col)        # Start the recursion process
+                bcl.append( (currentCluster) )  # Cluster is complete, add it to the list
+                del(currentCluster)             # Delete the current cluster...
+                currentCluster = []             # And reinitialize it
 
 
     # All code below has be shamelessly stolen from Stan Garrow     
